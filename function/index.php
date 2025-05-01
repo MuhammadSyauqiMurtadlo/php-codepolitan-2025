@@ -1,7 +1,7 @@
 <?php
 
-$name = "Muhammad Syauqi Murtadlo";
-function cetakPesan()
+$name = "Muhammad Syauqi Murtadlo | Full Stack Developer";
+function printMessage()
 {
   global $name;
   if (empty($name))
@@ -10,4 +10,4 @@ function cetakPesan()
     echo "Selamat datang, $name!";
 }
 
-cetakPesan();
+printMessage();

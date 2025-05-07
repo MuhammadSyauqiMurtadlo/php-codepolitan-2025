@@ -1,1 +1,1 @@
-a:3:{i:0;a:2:{s:4:"todo";s:17:"Sarapan Pagi Hari";s:6:"status";i:0;}i:1;a:2:{s:4:"todo";s:17:"Sarapan Pagi Hari";s:6:"status";i:0;}i:2;a:2:{s:4:"todo";s:11:"Makan Siang";s:6:"status";i:0;}}
+a:1:{i:0;a:2:{s:4:"todo";s:20:"Rapat dengan Manajer";s:6:"status";i:0;}}

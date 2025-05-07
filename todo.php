@@ -1,11 +1,18 @@
 <?php
 
+// total array yang disiapkan untuk disimpan
 $todos = [];
-$file = file_get_contents('todo.txt');
-$todos = unserialize($file);
+// jika file todo.txt ada, ambil isinya
+if (file_exists('todo.txt')) {
+  // ambil isi file todo.txt dan simpan ke dalam variabel $file
+  $file = file_get_contents('todo.txt');
+  // ubah isi file yang berbentuk string menjadi array
+  $todos = unserialize($file);
+}
 
+// jika ada data yang dikirimkan melalui method POST
 if (isset($_POST['todo'])) {
-  $data = $_POST['todo'];
+  $data = $_POST['todo']; // ambil data dari form
   $todos[] = [
     'todo' => $data,
     'status' => 0
@@ -31,26 +38,13 @@ if (isset($_POST['todo'])) {
     <button type="submit">Add</button>
   </form>
   <ul>
-    <li>
-      <input type="checkbox" name="todo" id="todo">
-      <label for="todo">Belajar Bahasa Pemrograman PHP</label>
-      <button type="submit">Delete</button>
-    </li>
-    <li>
-      <input type="checkbox" name="todo" id="todo">
-      <label for="todo">Belajar Framework Laravel</label>
-      <button type="submit">Delete</button>
-    </li>
-    <li>
-      <input type="checkbox" name="todo" id="todo">
-      <label for="todo">Belajar Database MySQL</label>
-      <button type="submit">Delete</button>
-    </li>
-    <li>
-      <input type="checkbox" name="todo" id="todo">
-      <label for="todo">Belajar Docker</label>
-      <button type="submit">Delete</button>
-    </li>
+    <?php foreach ($todos as $key => $value) : ?>
+      <li>
+        <input type="checkbox" name="todo" id="todo">
+        <label for="todo"><?= $value['todo'] ?></label>
+        <button type="submit">Delete</button>
+      </li>
+    <?php endforeach; ?>
   </ul>
 </body>
 

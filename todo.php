@@ -17,7 +17,23 @@ if (isset($_POST['todo'])) {
     'todo' => $data,
     'status' => 0
   ];
+  saveTodo($todos);
+}
+
+if (isset($_GET['status'])) {
+  $todos[$_GET['key']]['status'] = $_GET['status'];
+  saveTodo($todos);
+}
+
+if (isset($_GET['hapus'])) {
+  unset($todos[$_GET['key']]);
+  saveTodo($todos);
+}
+
+function saveTodo($todos)
+{
   file_put_contents('todo.txt', serialize($todos));
+  header('Location: todo.php');
 }
 ?>
 
@@ -40,9 +56,16 @@ if (isset($_POST['todo'])) {
   <ul>
     <?php foreach ($todos as $key => $value) : ?>
       <li>
-        <input type="checkbox" name="todo" id="todo">
-        <label for="todo"><?= $value['todo'] ?></label>
-        <button type="submit">Delete</button>
+        <input type="checkbox" name="todo" id="todo" onclick="window.location.href='todo.php?status=<?php echo ($value['status'] == 1) ? '0' : '1'; ?>&key=<?= $key ?>'"
+          <?php if ($value['status'] == 1) echo 'checked' ?>>
+        <label for="todo">
+          <?php if ($value['status'] == 1) : ?>
+            <strike><?= $value['todo'] ?></strike>
+          <?php else : ?>
+            <?= $value['todo'] ?>
+          <?php endif; ?>
+        </label>
+        <a type="submit" href="todo.php?hapus=1&key=<?= $key ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
       </li>
     <?php endforeach; ?>
   </ul>

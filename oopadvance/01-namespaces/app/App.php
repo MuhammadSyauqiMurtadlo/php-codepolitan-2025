@@ -1,4 +1,4 @@
-<php
+<?php
 
 namespace App;
 
@@ -12,5 +12,5 @@ class Table {
     }
 }
 
-App\Table::get();
+Table::get();
 ModelTable::get();
